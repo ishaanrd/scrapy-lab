@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import sys
-sys.path.extend("/Users/trapti/PycharmProjects/lab8/venv/lib/python3.7/site-packages")
+
 import unidecode
 import re
 
