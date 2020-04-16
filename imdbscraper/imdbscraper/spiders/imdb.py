@@ -5,6 +5,7 @@ import re
 class ImdbSpider(scrapy.Spider):
     name = 'imdb'
     start_urls = ['https://www.imdb.com/title/tt0758758/fullcredits/']
+    #start_urls = ["https://www.imdb.com/name/nm0386472/bio"]
     scraped_movies = ["/title/tt0758758/"]
 
     def parse(self, response):
@@ -59,3 +60,11 @@ class ImdbSpider(scrapy.Spider):
                 self.scraped_movies.append(movie_id)
                 film_url = f"https://www.imdb.com{movie_id}fullcredits/"
                 yield response.follow(film_url, callback=self.parse)
+
+
+    def parse_bio(self, response):
+        table = response.css("#overviewTable")
+        height = table.css("tr")[3]
+        height = height.css("td")[1].extract()
+        height = height.split("(")[1].split(")")[0][:-2]
+        height = float(height)
