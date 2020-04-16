@@ -37,14 +37,14 @@ class ImdbSpider(scrapy.Spider):
                 except:
                     role_name = actor_info[3].css("::text").extract()[0].strip().replace('\n', '')
 
-                yield{
-                    "movie_id": movie_id,
-                    "movie_name": movie_name,
-                    "movie_year": (movie_year),
-                    "actor_name": self.actor_name,
-                    "actor_id": actor_id,
-                    "role_name": role_name
-                }
+                # yield{
+                #     "movie_id": movie_id,
+                #     "movie_name": movie_name,
+                #     "movie_year": (movie_year),
+                #     "actor_name": self.actor_name,
+                #     "actor_id": actor_id,
+                #     "role_name": role_name
+                # }
                 es.index(index='imdb1_movies',
                          doc_type='movies',
                          #id=uiid4(),
