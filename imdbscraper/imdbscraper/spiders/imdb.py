@@ -64,7 +64,16 @@ class ImdbSpider(scrapy.Spider):
 
     def parse_bio(self, response):
         table = response.css("#overviewTable")
+        birth_year = table.css("tr")[0]
+        birth_year = birth_year.css("td")[1]
+        birth_year = birth_year.css("a")[1]
+        birth_year = birth_year.css("::text").extract_first()
+        birth_year = int(birth_year)
+
         height = table.css("tr")[3]
         height = height.css("td")[1].extract()
         height = height.split("(")[1].split(")")[0][:-2]
         height = float(height)
+
+        print(height)
+        print(birth_year)
